@@ -1,4 +1,6 @@
-# my-flashcards
+# My Flashcards (in progress)
+A simple web application for note-taking, flashcards, and quizzes. Built with Vue and Sass. The project is still very much in progress, but you 
+can check out deployed versions here. https://affectionate-kilby-ed8413.netlify.app/
 
 ## Project setup
 ```
