@@ -12,20 +12,43 @@ mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopolo
 
 
   const User = mongoose.model('User', new mongoose.Schema({
-    data:Object
+    username:{
+        type:String,
+        maxlength:100
+    },
+    password:{
+        type:String,
+        maxlength:100
+    },
+    flashcards:Array,
+    notes:Array
+
   }));
 
 
 exports.handler = async (event, context) => {
 
+    if(!event.body.username | !event.body.password){
+        return{
+            statusCode:400,
+            body:"Request body must have a username and a password."
+        }
+    }
+
+    const alreadyExists = await User.findOne({username:req.body.username})
+    if(alreadyExists){
+        return{
+            statusCode:400,
+            body:"Username already exists."
+        }
+    }
+
 
     const user = new User({
-        data:{
-            username:event.body.username,
-            password:event.body.password,
-            flashcards:[],
-            notes:[]
-        }
+        username:event.body.username,
+        password:event.body.password,
+        flashcards:[],
+        notes:[]
     })
 
     try {
