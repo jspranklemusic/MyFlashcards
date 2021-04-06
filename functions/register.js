@@ -28,8 +28,10 @@ mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopolo
 
 exports.handler = async (event, context) => {
 
-    console.log("USERNAME",event.body.username);
-    console.log("PASSWORD",event.body.password);
+
+    let body = JSON.parse(event.body)
+    console.log("BODY",body);
+
 
   
 
