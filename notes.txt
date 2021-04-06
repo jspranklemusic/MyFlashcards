@@ -30,6 +30,8 @@ BUGS:
 9. The behavior for adding flashcards is strange, doesn't work right if there are zero?
 10. The router should handle going to an id or page that doesn't exist.
 
+git command:
+git add --all && git commit -m "message" && git push
 
 Info on serverless functions on Netlify:
 https://scotch.io/tutorials/build-a-secure-serverless-function-with-netlify#toc-create-your-serverless-project

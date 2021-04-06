@@ -13,27 +13,11 @@ mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopolo
   }));
 
 
-exports.handler = async (event, context, callback) => {
-    const eventStr = JSON.stringify(event)
-    
-    let user = new User({
-        data:{
-            username:eventStr.body.username,
-            password:eventStr.body.password,
-            notes:[],
-            flashcards:[]
-        }
-    })
-    let response;
-    try {
-        response = await user.save();
-    } catch (error) {
-        response = error
+exports.handler = async (event, context) => {
+   
+
+    return{
+        statusCode:200,
+        body:JSON.stringify("yo dawg I heard you like to register")
     }
-
-
-    callback(null, {
-      statusCode: 200,
-      body: JSON.stringify(response)
-    })
   }
