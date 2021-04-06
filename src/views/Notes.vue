@@ -21,6 +21,7 @@
                     @change-content="changeContent" 
                     @delete-note="deleteNote" 
                     @new-note="addNote"
+                    @init-notes="initNotes"
                     :swipenote="addNoteTimeout"
                     :class="{'notepad-fall':deletedID}"
                     style="z-index:2;"
@@ -40,31 +41,23 @@
                 
                 }" v-for="note in [...notes].reverse()" :key="note.id" >
                 <h3>{{note.title}}</h3>
-                <h5>{{note.subject}}</h5>
-                <em>{{note.date}}</em>
+                <!-- <h5>{{note.subject}}</h5> -->
+                <em>{{note.date.toLocaleDateString()}}</em>
                 <p>{{note.content.length > 40 ? note.content.slice(0,40)+"..." : note.content+""}}</p>
             </div>
+            <em style="color:grey;" v-show="!notes.length">You don't have any notes yet.</em>
         </section>
     </div>
 </template>
 
 <script>
 import Note from '../components/notes/Note.vue'
+import generateID from '../scripts/generateID.js'
 import Alert from '../components/ui/Alert.vue'
 export default {
   components: { Note, Alert},
     data(){
         return{
-            notes:[
-                {
-                    title:"Title",
-                    date:new Date(Date.now()).toLocaleDateString(),
-                    subject:"Class 101",
-                    id:1,//Math.random().toString(),
-                    canEdit:false,
-                    content:"Let's write something."
-                },
-            ],
             selectedID:1,
             deletedID:null,
             selectedIndex:0,
@@ -73,21 +66,37 @@ export default {
         }
     },
     methods:{
+        initNotes(){
+            let myDate = new Date( Date.now() );
+            let id = generateID();
+            
+                this.notes.push({
+                    title:"",
+                    date:myDate,
+                    subject:"",
+                    id:id,
+                    canEdit:false,
+                    content:""
+                })
+
+            this.selectedID = id;
+            this.selectedIndex = 0;
+        },
         addNote(){
         
             if(this.addNoteTimeout) return;
 
                 //this will have some tricky logic, because I will need to wait until the transition
                 //of the turning page is complete before nullifying the value of ""
-            
+                let myDate = new Date(Date.now())
 
                 this.notes.push({
-                    title:"Title",
-                    date:new Date(Date.now()).toLocaleDateString(),
-                    subject:"Class 101",
-                    id:Math.random().toString(),
+                    title:"",
+                    date:myDate,
+                    subject:"",
+                    id:generateID(5),
                     canEdit:false,
-                    content:"Let's write something."
+                    content:""
                 })
                 this.addNoteTimeout = setTimeout(()=>{
                     this.selectedIndex = this.notes.length - 1;
@@ -110,14 +119,16 @@ export default {
             this.selectedIndex = this.notes.findIndex(note=>note.id==this.selectedID)
         },
         deleteNote(){
-            if(!this.deletedID & this.notes.length > 1){
+            if(!this.deletedID){
                 this.deletedID = this.selectedID;
                 setTimeout(()=>{
-                    let arr = []; (arr);
-                    this.notes.forEach(note=>{
-                        if(note.id != this.selectedID) arr.push(note)
-                    })
-                    this.notes = arr;
+                    // let arr = []; (arr);
+                    // this.notes.forEach(note=>{
+                    //     if(note.id != this.selectedID) arr.push(note)
+                    // })
+                    // this.notes = arr;
+
+                    this.notes.splice(this.selectedIndex,1);
                     if(this.selectedIndex > 0) this.selectedIndex--;
                     this.selectedID = this.notes[this.selectedIndex]?.id;
                     this.deletedID=null;
@@ -136,14 +147,11 @@ export default {
         }
 
     },
-    // computed:{
-    //     backgroundNoteProp(){
-    //         return !this.deletedID ? this.notes[this.selectedIndex] : this.notes[this.selectedIndex - 1] || this.notes[this.selectedIndex + 1]       
-    //     },
-    //     foregroundNoteProp(){
-    //         return !this.addNoteTimeout ? this.notes[this.selectedIndex] : this.notes[this.notes.length - 1];
-    //     }
-    // }
+    computed:{
+        notes(){
+            return this.$store.state.notes;
+        }
+    }
 }
 </script>
 

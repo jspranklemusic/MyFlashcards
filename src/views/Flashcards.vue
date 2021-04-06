@@ -41,11 +41,9 @@ export default {
         justify-content: center;
     }
     h1{
-        margin-top:2rem;
         background:navy;
         width:max-content;
-        margin:auto;
-        margin-top:2rem;
+        margin:1rem auto;
         padding:0.5rem 4rem;
         border-radius:100px;
         box-sizing:border-box;

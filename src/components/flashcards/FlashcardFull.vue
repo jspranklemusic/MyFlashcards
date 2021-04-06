@@ -49,14 +49,14 @@
             @edit-answer="setIndividualAnswer"
             > 
         </flashcard-item>
-        <flashcard-item 
+        <!-- <flashcard-item 
             v-if="flashcard.questions.length==0"
             @delete-card="deleteCard"
             @edit-question="setIndividualQuestion"
             @edit-answer="setIndividualAnswer"
         >
             
-        </flashcard-item>
+        </flashcard-item> -->
     </div>
 
     <div v-show="isStudyMode"  class="flashcards-container">
@@ -100,8 +100,8 @@ export default {
 
         },
         deleteCard(id){
-            if(this.flashcard.questions.length > 1) 
-                this.cardfadingout = id;
+            // if(this.flashcard.questions.length > 1) 
+            this.cardfadingout = id;
             
 
             //the timeout waits for the animation to finish.

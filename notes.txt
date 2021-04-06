@@ -13,3 +13,24 @@ So... this web app should have the ability for you to:
 11. Have a "general" category for lazy people who just want to get one set of cards quickly
 12. Have the ability to move flashcards back and forth between categories.
 13. Have a "comprehensive" where you can review ALL random flashcards for one class/semester.
+
+///
+s
+
+BUGS:
+
+1. When removing a note, the blank text of the new note is visible. 
+2. Logging in doesn't do anything yet.
+3. The homepage should take you somewhere. 
+4. When you create a note, it should also give you the time. --DONE
+5. On mobile, the screen moves weirdly.
+6. "Saving" the note doesn't do anything.
+7. If there is no note, typing should create a new note. --DONE
+8. There should be placeholder for the text --DONE
+9. The behavior for adding flashcards is strange, doesn't work right if there are zero?
+10. The router should handle going to an id or page that doesn't exist.
+
+
+Info on serverless functions on Netlify
+https://scotch.io/tutorials/build-a-secure-serverless-function-with-netlify#toc-create-your-serverless-project
+

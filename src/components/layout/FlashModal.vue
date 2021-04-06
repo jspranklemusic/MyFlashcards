@@ -47,7 +47,7 @@ export default {
               title:this.$refs.title.value || "Carbon Structures",
               subject:this.$refs.subject.value || "Organic Chemistry 101",
               description:this.$refs.description.value || "An exploration of carbon structures.",
-              questions:[{question:"Question",answer:"Answer"}],
+              questions:[{question:"",answer:""}],
               id:id
 
           });

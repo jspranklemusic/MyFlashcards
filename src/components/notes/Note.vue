@@ -9,14 +9,26 @@
                 <i @click="$emit('delete-note')" class="fas fa-trash"></i>
             </div>
             <div class="pattern">
-                <div @click="$refs.content.focus()" class="content">
-                        <h2 @click.stop="$refs.title.focus()" ref="title" :contenteditable="true">{{note.title || "title"}}</h2>
-                        <h4>{{note.subject || "subject"}}</h4>
-                        <em style="opacity:0.5;">{{note.date || "date"}}</em>
+                <div @click="notesClickHandler" class="content">
+                        <h2 
+                            @click.stop="note?.id ? $refs.title.focus() : $emit('init-notes')" 
+                            ref="title" 
+                            @input="save"
+                            :contenteditable="true">
+                            
+                            <!-- {{note.title || "Your Title"}} -->
+                           
+                        </h2>
+                        
+                        <!-- <h4>{{note.subject || "subject"}}</h4> -->
+                        <em style="opacity:0.5;">{{note.date ? note.date.toLocaleDateString() + " at " + note.date.toLocaleTimeString() : mountedDate.toLocaleDateString() + " at " + mountedDate.toLocaleTimeString() }}</em>
                         <br><br>
+                        
                         <p @input="save" ref="content" 
                             :contenteditable="true">
+                            
                         </p>
+                        
                 </div>
             </div>
         </div>
@@ -33,8 +45,36 @@ export default {
             default:false
         }
     },
-    emits:['delete-note', 'new-note','change-content'],
+    emits:['delete-note', 'new-note','change-content','init-notes'],
+    data(){
+        return{
+            mountedDate:new Date(Date.now()),
+            
+        }
+    },
     methods:{
+        notesClickHandler(){
+            
+            if(this.note?.id){
+
+                this.$refs.content.focus()
+            } else{
+                console.log('yolo')
+                this.$emit('init-notes')
+                this.$refs.content.focus()
+            }
+            
+        },
+        titleClickHandler(){
+             if(this.note?.id){
+
+                this.$refs.title.focus()
+            } else{
+                console.log('yolo')
+                this.$emit('init-notes')
+                this.$refs.title.focus()
+            }
+        },
         alertHandler(){
             this.save();
             if(!this.$store.state.alert){
@@ -52,13 +92,24 @@ export default {
             });
         }
     },
+    computed:{
+        placeholderTitle(){
+            return this.note.title ? "" : "Your Title Here"
+        },
+        placeholderContent(){
+            return this.note.content ? "" : "Your text content here."
+        }
+    },
     updated(){
-        this.$refs.content.innerText = this.note.content;
+        this.$refs.content.innerText = this.note.content || "";
+        this.$refs.title.innerText = this.note.title || ""
         if(this.swipenote) console.log(this.note.content)
         
     },
     mounted(){
-        this.$refs.content.innerText = this.note.content;
+        console.log(this.note.title, this.note.content)
+        this.$refs.content.innerText = this.note.content || "";
+        this.$refs.title.innerText = this.note.title || "";
         
         document.addEventListener('keydown',e=>{
             
@@ -75,11 +126,6 @@ export default {
     }
 }
 </script>
-
-
-
-
-
 
 
 
@@ -180,6 +226,48 @@ h4,em{
 
 p{
     transform:translateY(-4px);
+
+    &:empty{
+
+        
+
+        &::after{
+            content:"Your text here.";
+            color:grey;
+            opacity:1;
+            transition:0.4s;
+
+
+            
+        }
+
+        &:focus{
+            &::after{
+                content:"Your text here.";
+                opacity:0;
+                transition:0.4s;
+            }
+        }
+    }
+}
+h2{
+     &:empty{
+
+        &::after{
+            content:"Your text here.";
+            color:grey;
+            opacity:1;
+            transition:0.4s;
+            
+        }
+        &:focus{
+            &::after{
+                content:"Your text here.";
+                opacity:0;
+                transition:0.4s;
+            }
+        }
+    }
 }
 
 .swipe-note{
