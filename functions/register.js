@@ -32,10 +32,17 @@ exports.handler = async (event, context) => {
     let body = JSON.parse(event.body)
     console.log("BODY",body);
 
+    if(!body.username | !body.password){
+        return {
+            statusCode:400,
+            body:"Request must have a username and a password."
+        }
+    }
+
 
   
 
-    const alreadyExists = await User.findOne({username:event.body.username})
+    const alreadyExists = await User.findOne({username:body.username})
     if(alreadyExists){
         return{
             statusCode:400,
@@ -45,8 +52,8 @@ exports.handler = async (event, context) => {
 
 
     const user = new User({
-        username:event.body.username,
-        password:event.body.password,
+        username:body.username,
+        password:body.password,
         flashcards:[],
         notes:[]
     })
