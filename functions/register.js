@@ -28,6 +28,8 @@ mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopolo
 
 exports.handler = async (event, context) => {
 
+    console.log(event.body)
+
     if(!event.body.username | !event.body.password){
         return{
             statusCode:400,
