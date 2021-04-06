@@ -31,12 +31,7 @@ exports.handler = async (event, context) => {
     console.log("USERNAME",event.body.username);
     console.log("PASSWORD",event.body.password);
 
-    if(!event.body.username | !event.body.password){
-        return{
-            statusCode:400,
-            body:"Request body must have a username and a password."
-        }
-    }
+  
 
     const alreadyExists = await User.findOne({username:req.body.username})
     if(alreadyExists){
