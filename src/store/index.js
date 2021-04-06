@@ -1,7 +1,21 @@
 import { createStore } from "vuex";
 
 export default createStore({
-  state: {},
+  state: {
+    user:null,
+    modalVisible:false,
+    flashModalVisible:false,
+    alert:"",
+    subjects:[
+      {
+      name:"", 
+      description:""
+      }
+    ],
+    flashcards:[
+
+    ]
+  },
   mutations: {},
   actions: {},
   modules: {},

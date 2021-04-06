@@ -1,0 +1,15 @@
+So... this web app should have the ability for you to:
+
+1. Make your own flash cards
+2. Make your own flash card quizzes
+3. Delete/edit your flash cards
+4. Make multiple choice quizzes
+5. Take notes
+6. Create class categories
+7. Create/change account, change account settings.
+8. Possibly do oauth.
+9. Search for keywords in your macro group of flashcards
+10. Search for keywords within one group of flashcards
+11. Have a "general" category for lazy people who just want to get one set of cards quickly
+12. Have the ability to move flashcards back and forth between categories.
+13. Have a "comprehensive" where you can review ALL random flashcards for one class/semester.
