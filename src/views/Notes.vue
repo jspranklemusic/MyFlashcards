@@ -158,6 +158,16 @@ export default {
 
 <style lang="scss" scoped>
 
+h1{
+        background:navy;
+        width:max-content;
+        margin:1rem auto;
+
+        padding:0.5rem 4rem;
+        border-radius:100px;
+        box-sizing:border-box;
+    }
+
 .notes-sidebar{
 
     height:100%;

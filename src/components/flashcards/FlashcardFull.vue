@@ -166,7 +166,7 @@ export default {
             background:rgba(0, 0, 128, 0.26);
             color:white;
             display:flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items:center;
             width:100%;
             

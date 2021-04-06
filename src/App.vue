@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <div class="layout" v-if="!$store.state.user">
+    <div class="layout" v-if="$store.state.user">
       <header>
          <MainSidebar/>
          

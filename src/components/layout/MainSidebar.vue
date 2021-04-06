@@ -6,21 +6,21 @@
             </router-link>
             
             <h3>My Flashcards</h3>
-            <nav>
+            <!-- <nav>
                 <router-link to="/subjects"><i class="fas fa-square-root-alt"></i> Subjects</router-link>
             </nav>
             <nav>
                 <router-link to="/quizzes"><i class="fas fa-question-circle"></i> Quizzes</router-link>
-            </nav>
+            </nav> -->
             <nav>
                 <router-link to="/flashcards"><i class="far fa-square"></i> Flashcards</router-link>
             </nav>
             <nav>
                 <router-link to="/notes"><i class="fas fa-pencil-alt"></i> Notes</router-link>
             </nav>
-            <nav>
+            <!-- <nav>
                 <router-link to="/settings"><i class="fas fa-cog"></i> Settings</router-link>
-            </nav>
+            </nav> -->
              <nav >
                 <a href="#"><span @click="$store.state.user=null"><i class="fas fa-user"></i> Logout</span></a>
             </nav>
