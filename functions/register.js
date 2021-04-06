@@ -14,7 +14,7 @@ mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopolo
 
 
 exports.handler = async (event, context) => {
-    
+
 
     const user = new User({
         data:{
@@ -25,11 +25,20 @@ exports.handler = async (event, context) => {
         }
     })
 
-    const results = await user.save();
+    try {
+        const results = await user.save();
+        return{
+            statusCode:200,
+            body:JSON.stringify(results)
+        }
+    } catch (error) {
+        return{
+            statusCode:400,
+            body:JSON.stringify(error)
+        }
+    }
+    
    
 
-    return{
-        statusCode:200,
-        body:JSON.stringify(results)
-    }
+    
   }
