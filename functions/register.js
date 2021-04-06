@@ -33,7 +33,7 @@ exports.handler = async (event, context) => {
 
   
 
-    const alreadyExists = await User.findOne({username:req.body.username})
+    const alreadyExists = await User.findOne({username:event.body.username})
     if(alreadyExists){
         return{
             statusCode:400,
