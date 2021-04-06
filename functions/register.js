@@ -14,12 +14,12 @@ mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopolo
 
 
 exports.handler = async (event, context, callback) => {
-    const event = JSON.stringify(event)
+    const eventStr = JSON.stringify(event)
     
     let user = new User({
         data:{
-            username:event.body.username,
-            password:event.body.password,
+            username:eventStr.body.username,
+            password:eventStr.body.password,
             notes:[],
             flashcards:[]
         }
