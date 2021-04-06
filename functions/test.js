@@ -1,6 +1,10 @@
 exports.handler = (event, context, callback) => {
     callback(null, {
       statusCode: 200,
-      body: 'No worries, all is working fine!'
+      body: JSON.stringify({
+        bananas:2,
+        apples:7,
+        fruits:this.apples + this.bananas
+      })
     })
   }
