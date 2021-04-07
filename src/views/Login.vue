@@ -5,7 +5,7 @@
       <form @submit.prevent="formHandler" class="login-form" action="">
 
         <TextInput @text-input="setUsername" input="username"/>
-        <TextInput input="password"/>
+        <TextInput @text-input="setUsername" input="password"/>
       
         <div class="button-login-row">
           <main-button :class="{
