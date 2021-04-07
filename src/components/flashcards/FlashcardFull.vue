@@ -107,6 +107,15 @@ export default {
             //the timeout waits for the animation to finish.
             setTimeout(()=>{
                 this.flashcard.questions = this.flashcard.questions.filter(question=>question.id!=id);
+                fetch('/.netlify/functions/save',{
+                method:"POST",
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({
+                    ...this.$store.state
+                })
+            })
             },350)
             
         },
@@ -119,6 +128,15 @@ export default {
                 this.flashcard.questions[ind].id = generateID(5);
             }
             this.flashcard.questions[ind].question = content;
+                fetch('/.netlify/functions/save',{
+                method:"POST",
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({
+                    ...this.$store.state
+                })
+            })
         },
         setIndividualAnswer(id,content){
             let ind;
@@ -129,12 +147,34 @@ export default {
                 this.flashcard.questions[ind].id = generateID(5);
             }
             this.flashcard.questions[ind].answer = content;
+                fetch('/.netlify/functions/save',{
+                method:"POST",
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({
+                    ...this.$store.state
+                })
+            })
         },
         setStudyMode(bool){
             this.isStudyMode = bool;
         },
-        deleteSet(){
-            alert('deleted!')
+        async deleteSet(){
+            //deletes a flashcard set from the store, and then saves it in the db
+            this.$route.push('/flashcards');
+            this.$store.state.flashcards.splice(this.index,1);
+            await fetch('/.netlify/functions/save',{
+                method:"POST",
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({
+                    ...this.$store.state
+                })
+            })
+           
+           
         }
     },
     computed:{

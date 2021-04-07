@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <div class="layout" v-if="$store.state.user">
+    <div class="layout" v-if="$store.state._id">
       <header>
          <MainSidebar/>
          
@@ -35,6 +35,38 @@ export default {
     
     return{
       loggingIn:false,
+    }
+  },
+  methods:{
+    checkForID(){
+      if(localStorage._id){
+        this.$store.state._id = localStorage._id
+        return true;
+      }else{
+        localStorage.clear();
+        return false;
+      }
+    },
+    async checkLogin(){
+      const response = await fetch('/.netlify/functions/login',{
+        headers:{
+          'Content-Type':'application/json'
+        },
+        method:"POST",
+        body:JSON.stringify({
+          _id:this.$store.state._id
+        })
+      })
+      if(response.ok){
+        const data = await response.json();
+        this.$store.state = {...this.$store.state,data}
+      }
+    }
+  },
+  async created(){
+    //first, check local storage for a user id. If there is one, fetch the user's info from the server.
+    if(this.checkForID() ){
+      this.checkLogin();
     }
   },
   mounted(){

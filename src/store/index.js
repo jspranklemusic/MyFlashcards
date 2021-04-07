@@ -2,7 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    user:null,
+    _id:null,
     modalVisible:false,
     flashModalVisible:false,
     alert:"",

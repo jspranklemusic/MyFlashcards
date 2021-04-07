@@ -22,7 +22,7 @@
                 <router-link to="/settings"><i class="fas fa-cog"></i> Settings</router-link>
             </nav> -->
              <nav >
-                <a href="#"><span @click="$store.state.user=null"><i class="fas fa-user"></i> Logout</span></a>
+                <a href="#"><span @click="logout"><i class="fas fa-user"></i> Logout</span></a>
             </nav>
             <div :class="{'transform-right':!visible,'toggle-icon':true}" >
                 <i @click="visible=!visible" class="fas fa-ellipsis-h" ></i>
@@ -37,6 +37,20 @@ export default {
     data(){
         return{
             visible:true
+        }
+    },
+    methods:{
+        logout(){
+            this.$store.state = {
+                _id:null,
+                modalVisible:false,
+                flashModalVisible:false,
+                alert:"",
+                subjects:[],
+                flashcards:[],
+                notes:[]
+            }
+            localStorage.clear()
         }
     }
 }

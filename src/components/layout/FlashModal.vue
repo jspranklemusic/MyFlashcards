@@ -40,21 +40,27 @@ export default {
               this.$store.state.flashModalVisible=!this.$store.state.flashModalVisible;
           },600)
       },
-      addFlashcard(){
+      async addFlashcard(){
           let id = generateID(14);
           this.$store.state.flashcards.push({
 
-              title:this.$refs.title.value || "Carbon Structures",
-              subject:this.$refs.subject.value || "Organic Chemistry 101",
-              description:this.$refs.description.value || "An exploration of carbon structures.",
+              title:this.$refs.title.value || "Your Flashcards Title",
+              subject:this.$refs.subject.value || "Your Subject 101",
+              description:this.$refs.description.value || "A description of your flashcards.",
               questions:[{question:"",answer:""}],
               id:id
 
           });
-
-          console.log(id)
-         
-          this.hideModal();
+        await fetch('/.netlify/functions/save',{
+            method:"POST",
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                ...this.$store.state
+            })
+        })
+        this.hideModal();
       }
   }
     

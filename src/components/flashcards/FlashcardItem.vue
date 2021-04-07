@@ -8,7 +8,7 @@
                 </div>
                
                 <div>
-                    <input ref="answer" @blur="$emit('edit-answer',cardID,$refs.answer.value)" :value="answer || ''" :placeholder="answer || 'Answer'" type="text">
+                    <input  ref="answer" @blur="$emit('edit-answer',cardID,$refs.answer.value)" :value="answer || ''" :placeholder="answer || 'Answer'" type="text">
                      <div class="after"></div>
                 </div>     
             </div>
@@ -22,7 +22,7 @@
 
 <script>
 export default {
-    props:['question','answer','cardID','hidecan'],
+    props:['question','answer','cardID','hidecan','save'],
 }
 </script>
 

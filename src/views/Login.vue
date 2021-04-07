@@ -2,9 +2,9 @@
   <div class="flex-homepage">
       <img class="main-logo" src="../assets/books.svg" alt="">
       <h1>My Flashcards</h1>
-      <form @submit.prevent="$store.state.user='not null'" class="login-form" action="">
+      <form @submit.prevent="formHandler" class="login-form" action="">
 
-        <TextInput input="username"/>
+        <TextInput @text-input="setUsername" input="username"/>
         <TextInput input="password"/>
       
         <div class="button-login-row">
@@ -20,6 +20,7 @@
             }">{{!this.loggingIn ? "Register" : "Login"}}</side-button>
         </div>
       </form>
+      <div class="error" v-show="this.error.length">{{error}}</div>
 
       
   </div>
@@ -36,8 +37,78 @@ export default
   data(){
     return{
       loggingIn:false,
+      username:"",
+      password:"",
+      error:"",
+    }
+  },
+  methods:{
+    formHandler(){
+      if(!this.loggingIn){
+        this.login();
+      }else{
+        this.register();
+      }
+    },
+    async register(){
+
+      if(this.username.length < 5){
+        this.error = "Username must be at least 5 characters long."
+        return
+      }
+      if(this.password.length < 5){
+        this.error = "Password must be at least 5 characters long."
+        return
+      }
+
+      const response = await fetch('/.netlify/functions/register',{
+        method:"POST",
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          username:this.username,
+          password:this.password
+        })
+      });
+
+      if(response.ok){
+        const data = await response.json();
+        this.$store.state = {...this.$store.state, data}
+        localStorage._id = data._id;
+      } else{
+        this.error = "Username already exists."
+      }
+    },
+    async login(){
+      const response = await fetch('/.netlify/functions/login',{
+        method:"POST",
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+          username:this.username,
+          password:this.password
+        })
+      });
+
+      if(response.ok){
+        const data = await response.json();
+        this.$store.state = {...this.$store.state, data}
+        localStorage._id = data._id;
+      } else{
+        this.error = "Invalid login credentials"
+      }
+
+    },
+    setUsername(txt){
+      this.username = txt
+    },
+    setPassword(txt){
+      this.password = txt
     }
   }
+  
 }
 </script>
 
@@ -118,6 +189,16 @@ export default
    
   }
 
+  .error{
+    background-color:red;
+    width:fit-content;
+    margin:1rem auto;
+    padding:0.5rem 1rem;
+    animation:fadeinerror 0.3s backwards;
+    
+
+  }
+
   .switchbuttons-left{
     animation:switchbuttons-left 0.5s backwards;
   }
@@ -141,6 +222,20 @@ export default
     100%{
       transform: translateX(0%) scale(1);
       
+    }
+  }
+
+  @keyframes fadeinerror{
+    0%{
+      opacity:0;
+      transform:translateY(40px);
+    }
+    70%{
+      transform:translateY(-5px);
+    }
+    100%{
+      opacity:1;
+      transform:translateY(0px);
     }
   }
  

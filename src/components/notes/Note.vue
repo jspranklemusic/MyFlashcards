@@ -26,7 +26,6 @@
                         
                         <p @input="save" ref="content" 
                             :contenteditable="true">
-                            
                         </p>
                         
                 </div>
@@ -77,6 +76,15 @@ export default {
         },
         alertHandler(){
             this.save();
+            fetch('/.netlify/functions/save',{
+                method:"POST",
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({
+                    ...this.$store.state
+                })
+            })
             if(!this.$store.state.alert){
                 this.$store.state.alert="Note saved!"
                 setTimeout(()=>{
@@ -107,6 +115,11 @@ export default {
         
     },
     mounted(){
+        this.interval = setInterval(()=>{
+            if(this.note.content){
+                this.alertHandler()
+            }
+        },300000)
         console.log(this.note.title, this.note.content)
         this.$refs.content.innerText = this.note.content || "";
         this.$refs.title.innerText = this.note.title || "";
@@ -123,6 +136,9 @@ export default {
               this.alertHandler();
             }
         })
+    },
+    beforeUnmount(){
+        clearInterval(this.interval)
     }
 }
 </script>
