@@ -5,13 +5,18 @@
             <!-- {{backgroundNoteProp.content}}
             {{foregroundNoteProp.content}} -->
            
-            <h3 @click="toggleNotesHandler" class="mobile-screen-switch">See All Notes -></h3>
+            
             <alert v-if="$store.state.alert">{{$store.state.alert}}</alert>
             
             
         </div>
     
         <section class="notes-container">
+            <h3 @click="toggleNotesHandler" class="mobile-screen-switch">
+                <span  v-if="toggleNotesList" >Hide notes <i class="fas fa-chevron-left"></i></span>
+                <span  v-else >View Notes <i class="fas fa-chevron-right"></i></span>
+            
+            </h3>
             <Note 
                 style="z-index:1;"
                 :note="backgroundNoteProp()" 
@@ -296,19 +301,27 @@ h1{
 
 
 .mobile-screen-switch{
-    @media only screen and (min-width:600px){
-        display:none;
-    }
+   
     display:block;
     color:black;
     text-align:center;
-    font-size:0.7rem;
-    transform:translateY(0.25rem);
-    background:white;
-    padding:0.5rem 1rem;
+    font-size:0.8rem;
+    padding:0;
     width:max-content;
+    background:skyblue;
     margin:auto;
+    
     border-radius:100px;
+    z-index:9;
+    position: fixed;
+    bottom:1rem;
+    padding:0.55rem;
+    padding-left:2rem;
+    left:1rem;
+
+     @media only screen and (min-width:600px){
+        display:none;
+    }
 }
 
 .notepad-fall{
