@@ -78,6 +78,7 @@ export default
         this.$store.state._id = data._id;
         this.$store.state.flashcards = data.flashcards;
         this.$store.state.notes = data.notes;
+        this.$store.state.notes.map(note=>note.date = new Date(note.date))
         localStorage._id = data._id;
       } else{
         this.error = "Username already exists."
@@ -101,6 +102,7 @@ export default
         this.$store.state._id = data._id;
         this.$store.state.flashcards = data.flashcards;
         this.$store.state.notes = data.notes;
+        this.$store.state.notes.map(note=>note.date = new Date(note.date))
         localStorage._id = data._id;
       } else{
         this.error = "Invalid login credentials"
