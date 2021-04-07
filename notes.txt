@@ -15,7 +15,6 @@ So... this web app should have the ability for you to:
 13. Have a "comprehensive" where you can review ALL random flashcards for one class/semester.
 
 ///
-s
 
 BUGS:
 
