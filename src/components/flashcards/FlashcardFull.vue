@@ -162,7 +162,7 @@ export default {
         },
         async deleteSet(){
             //deletes a flashcard set from the store, and then saves it in the db
-            this.$route.push('/flashcards');
+            this.$router.push('/flashcards');
             this.$store.state.flashcards.splice(this.index,1);
             await fetch('/.netlify/functions/save',{
                 method:"POST",

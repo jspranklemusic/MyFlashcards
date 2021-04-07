@@ -51,6 +51,8 @@ export default {
               id:id
 
           });
+        
+        this.hideModal();
         await fetch('/.netlify/functions/save',{
             method:"POST",
             headers:{
@@ -60,7 +62,6 @@ export default {
                 ...this.$store.state
             })
         })
-        this.hideModal();
       }
   }
     

@@ -66,23 +66,33 @@ export default {
         }
     },
     methods:{
-        initNotes(){
+        async initNotes(){
             let myDate = new Date( Date.now() );
             let id = generateID();
             
-                this.notes.push({
-                    title:"",
-                    date:myDate,
-                    subject:"",
-                    id:id,
-                    canEdit:false,
-                    content:""
-                })
+            this.notes.push({
+                title:"",
+                date:myDate,
+                subject:"",
+                id:id,
+                canEdit:false,
+                content:""
+            })
 
             this.selectedID = id;
             this.selectedIndex = 0;
+
+             await fetch('/.netlify/functions/save',{
+                        method:"POST",
+                        headers:{
+                            'Content-Type':'application/json'
+                        },
+                        body:JSON.stringify({
+                            ...this.$store.state
+                        })
+                    })
         },
-        addNote(){
+        async addNote(){
         
             if(this.addNoteTimeout) return;
 
@@ -98,12 +108,22 @@ export default {
                     canEdit:false,
                     content:""
                 })
+
                 this.addNoteTimeout = setTimeout(()=>{
                     this.selectedIndex = this.notes.length - 1;
                     this.selectedID = this.notes[this.selectedIndex].id;
                     this.addNoteTimeout = null;
                     
                 },1000)
+                 await fetch('/.netlify/functions/save',{
+                        method:"POST",
+                        headers:{
+                            'Content-Type':'application/json'
+                        },
+                        body:JSON.stringify({
+                            ...this.$store.state
+                        })
+                    })
         
                 
             
@@ -121,7 +141,7 @@ export default {
         deleteNote(){
             if(!this.deletedID){
                 this.deletedID = this.selectedID;
-                setTimeout(()=>{
+                setTimeout(async ()=>{
                     // let arr = []; (arr);
                     // this.notes.forEach(note=>{
                     //     if(note.id != this.selectedID) arr.push(note)
@@ -132,7 +152,20 @@ export default {
                     if(this.selectedIndex > 0) this.selectedIndex--;
                     this.selectedID = this.notes[this.selectedIndex]?.id;
                     this.deletedID=null;
+
+                    await fetch('/.netlify/functions/save',{
+                        method:"POST",
+                        headers:{
+                            'Content-Type':'application/json'
+                        },
+                        body:JSON.stringify({
+                            ...this.$store.state
+                        })
+                    })
                 },500)
+                
+           
+
                 
             }
         },
