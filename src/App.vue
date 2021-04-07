@@ -48,18 +48,24 @@ export default {
       }
     },
     async checkLogin(){
-      const response = await fetch('/.netlify/functions/login',{
+      const response = await fetch('/.netlify/functions/fetch',{
         headers:{
           'Content-Type':'application/json'
         },
         method:"POST",
         body:JSON.stringify({
-          _id:this.$store.state._id
+          _id:localStorage._id
         })
       })
       if(response.ok){
         const data = await response.json();
-        this.$store.state = {...this.$store.state,data}
+        this.$store.state.flashcards = data.flashcards;
+        this.$store.state._id = data._id;
+        this.$store.state.notes = data.notes;
+        this.$store.state.user = data.user;
+
+      }else{
+        return
       }
     }
   },
