@@ -74,7 +74,10 @@ export default
 
       if(response.ok){
         const data = await response.json();
-        this.$store.state = {...this.$store.state, data}
+        this.$store.state.username = data.username;
+        this.$store.state._id = data._id;
+        this.$store.state.flashcards = data.flashcards;
+        this.$store.state.notes = data.notes;
         localStorage._id = data._id;
       } else{
         this.error = "Username already exists."
@@ -94,7 +97,10 @@ export default
 
       if(response.ok){
         const data = await response.json();
-        this.$store.state = {...this.$store.state, data}
+        this.$store.state.username = data.username;
+        this.$store.state._id = data._id;
+        this.$store.state.flashcards = data.flashcards;
+        this.$store.state.notes = data.notes;
         localStorage._id = data._id;
       } else{
         this.error = "Invalid login credentials"
