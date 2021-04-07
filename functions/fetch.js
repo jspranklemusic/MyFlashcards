@@ -31,14 +31,14 @@ exports.handler = async (event, context) => {
     let body = JSON.parse(event.body)
     console.log("BODY",body);
 
-    if(!body.id){
+    if(!body._id){
         return {
             statusCode:400,
             body:"Request must have an id."
         }
     }
     try {
-      const user = await User.findOne({_id:id})
+      const user = await User.findOne({_id:body._id})
       if(user){
         return{
           statusCode:200,

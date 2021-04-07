@@ -41,15 +41,7 @@ export default {
     },
     methods:{
         logout(){
-            this.$store.state = {
-                _id:null,
-                modalVisible:false,
-                flashModalVisible:false,
-                alert:"",
-                subjects:[],
-                flashcards:[],
-                notes:[]
-            }
+            this.$store.replaceState({})
             localStorage.clear()
         }
     }

@@ -40,6 +40,7 @@ export default {
   methods:{
     checkForID(){
       if(localStorage._id){
+
         this.$store.state._id = localStorage._id
         return true;
       }else{
