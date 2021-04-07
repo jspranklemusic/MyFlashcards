@@ -10,7 +10,9 @@
   "dependencies": {
     "@okta/okta-signin-widget": "^3.9.2",
     "axios": "^0.19.2",
+    "bcrypt": "^5.0.1",
     "core-js": "^3.6.5",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.3",
     "netlify-lambda": "^1.6.3",
     "parcel": "^1.12.4",

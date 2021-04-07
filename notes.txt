@@ -36,3 +36,8 @@ git add --all && git commit -m "message" && git push
 Info on serverless functions on Netlify:
 https://scotch.io/tutorials/build-a-secure-serverless-function-with-netlify#toc-create-your-serverless-project
 
+Now build the backend. 
+
+1. Login
+2. Register
+3. Modify notes and flashcards

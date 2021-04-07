@@ -4,18 +4,67 @@ mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopolo
     console.log('connected!')
   })
   .catch(err=>{
-    console.log(err)
+    console.log("Error", err)
   });
 
 
+  console.log(process.env.MONGO_URI)
+
+
   const User = mongoose.model('User', new mongoose.Schema({
-    data:Object
+    username:{
+        type:String,
+        maxlength:100
+    },
+    password:{
+        type:String,
+        maxlength:100
+    },
+    flashcards:Array,
+    notes:Array
+
   }));
 
 
-exports.handler = (event, context, callback) => {
-    callback(null, {
-      statusCode: 200,
-      body: JSON.stringify(event)
-    })
+exports.handler = async (event, context) => {
+
+
+    let body = JSON.parse(event.body)
+    console.log("BODY",body);
+
+    if(!body.id){
+        return {
+            statusCode:400,
+            body:"Request must have an id."
+        }
+    }
+
+
+    try {
+      const user = await User.findOne({_id:id})
+      if(user){
+        user.flashcards = body.flashcards;
+        user.notes = body.notes;
+        await user.save();
+        return{
+          statusCode:200,
+          body:JSON.stringify(user)
+        }
+      }else{
+        return{
+          statusCode:401,
+          body:"Invalid login credentials."
+        }
+      }
+        
+    } catch (error) {
+        return{
+            statusCode:400,
+            body:JSON.stringify(error)
+        }
+    }
+    
+   
+
+    
   }

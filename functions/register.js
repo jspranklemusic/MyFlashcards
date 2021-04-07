@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true})
   .then(()=>{
     console.log('connected!')
@@ -39,7 +41,7 @@ exports.handler = async (event, context) => {
         }
     }
 
-
+  
   
 
     const alreadyExists = await User.findOne({username:body.username})
@@ -50,10 +52,11 @@ exports.handler = async (event, context) => {
         }
     }
 
+    const hashed = await bcrypt.hash(body.password,1);
 
     const user = new User({
         username:body.username,
-        password:body.password,
+        password:hashed,
         flashcards:[],
         notes:[]
     })
