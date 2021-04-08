@@ -50,7 +50,7 @@ export default {
 
 <style lang="scss" scoped>
     .sidebar{
-        background:rgba(255, 255, 255, 0.932);
+        background:rgba(255, 255, 255, 0.98);
         height:calc(var(--vh, 1vh) * 100);
         width:9rem;
         position:absolute;
@@ -61,7 +61,7 @@ export default {
         transition:0.25s;
 
         & h3{
-            font-size:1rem;
+            font-size:1.1rem;
             margin-bottom:1rem;
         }
 
@@ -79,7 +79,7 @@ export default {
         & a{
             margin-left:0.5rem;
             text-decoration:none;
-            font-size:0.8rem;
+            font-size:0.9rem;
             color:rgb(59, 59, 59);
 
             & i{
@@ -121,9 +121,10 @@ export default {
            transition:0.25s;
            background:skyblue;
            border-radius:50%;
-           width:2rem;
-           height:2rem;
+           width:2.25rem;
+           height:2.25rem;
            display:flex;
+           font-size:1.5rem;
            align-items: center;
            justify-content: center;
 

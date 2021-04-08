@@ -93,12 +93,22 @@ export default {
         top:0;
         left:0;
 
+        @media only screen and (max-width:600px){
+                padding:20px;
+                
+            }
+
 
         &-content{
-            width:60%;
-            min-width:280px;
+            width:75%;
+            max-width:600px;
             background:rgba(128, 128, 128, 0.8);
             margin:4rem auto;
+
+            @media only screen and (max-width:600px){
+                width:100%;
+                
+            }
         }
     }
 

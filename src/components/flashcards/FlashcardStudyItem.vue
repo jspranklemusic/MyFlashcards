@@ -132,6 +132,7 @@ export default {
         backface-visibility: hidden;
         transition:0.3s;
         background:rgb(255, 255, 255);
+        overflow:hidden;
     }
 
 
@@ -144,6 +145,7 @@ export default {
         padding:1rem 1rem;
         height:20rem;
         display:block;
+        
        
 
        

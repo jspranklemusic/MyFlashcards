@@ -302,7 +302,6 @@ h1{
 
 .mobile-screen-switch{
    
-    display:block;
     color:black;
     text-align:center;
     font-size:0.8rem;
@@ -310,13 +309,15 @@ h1{
     width:max-content;
     background:skyblue;
     margin:auto;
-    
+    transition:0.5s;
     border-radius:100px;
     z-index:9;
     position: fixed;
     bottom:1rem;
-    padding:0.55rem;
-    padding-left:2rem;
+    height:2.25rem;
+    display:flex;
+    align-items:center;
+    padding:0rem 0.8rem 0rem 2.5rem;
     left:1rem;
 
      @media only screen and (min-width:600px){

@@ -29,6 +29,7 @@ export default {
         padding:0.5rem;
         padding-top:1rem;
         word-break:break-all;
+        font-size:1.25rem;
       
     }
 
@@ -38,7 +39,7 @@ export default {
         font-weight:500;
         text-align:center;
         opacity:0.7;
-        font-size:1rem;
+        font-size:0.9rem;
     }
 
     hr{
@@ -46,11 +47,12 @@ export default {
         margin:0.5rem auto;
         border:transparent;
         border-bottom:1px solid rgba(128, 128, 128, 0.486);
+        
     }
 
     p{
         padding:1rem;
-        
+        font-size:0.9rem;
     }
 
     .edit-study-btns{
@@ -93,8 +95,8 @@ export default {
 
     @keyframes fadein-subject{
         0%{
-            opacity:0;
-            transform:scale(0.8) translateX(2rem);
+            opacity:0.5;
+            transform:scale(0.92) translateX(1rem);
         }
 
         100%{

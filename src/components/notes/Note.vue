@@ -171,6 +171,7 @@ h4,em{
   border-radius:5px;
   overflow:hidden;
   margin:0 auto;
+  animation:fadein-note 0.5s backwards ease;
 }
 
 
@@ -307,6 +308,17 @@ h2{
     100%{
         opacity:1;
         transform: rotateY(360deg);
+    }
+}
+
+@keyframes fadein-note{
+    0%{
+        opacity:0.25;
+        transform: translateY(30px);
+    }
+     100%{
+        opacity:1;
+        transform: translateY(0px);
     }
 }
 </style>
