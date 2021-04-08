@@ -4,7 +4,10 @@ node_modules
 
 
 # local env files
+<<<<<<< HEAD
 env
+=======
+>>>>>>> 89b93ff3517032335b4465c3809cc3907a9ddcb3
 .env
 .env.local
 .env.*.local

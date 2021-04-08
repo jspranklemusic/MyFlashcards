@@ -317,7 +317,7 @@ h1{
     height:2.25rem;
     display:flex;
     align-items:center;
-    padding:0rem 0.8rem 0rem 2.5rem;
+    padding:0rem 0.8rem 0rem 2.2rem;
     left:1rem;
 
      @media only screen and (min-width:600px){
