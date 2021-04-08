@@ -1,6 +1,12 @@
 <template>
 <div :value="value">
-    <input @input="$emit('text-input',value)" v-model="value" :id="inputDashed(splitText())" :placeholder="inputCapped(splitText())" type="text">
+    <input 
+      @input="$emit('text-input',value)" 
+      v-model="value" :id="inputDashed(splitText())" 
+      :required="required || false"
+      :placeholder="inputCapped(splitText())" 
+      :type="type || 'text'">
+      
     <label :for="inputDashed(splitText())">{{inputCapped(splitText())}}</label>
 
 </div>
@@ -9,7 +15,7 @@
 <script>
 export default {
     emits:['text-input'],
-    props:['input'],
+    props:['input','type','required'],
     data(){
       return{
         value:""
@@ -47,6 +53,7 @@ export default {
       outline:transparent;
       padding-left:1rem;
       transition:0.25s;
+      box-shadow:none;
       
 
       &::placeholder{

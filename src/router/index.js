@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Subjects from "../../src/views/Subjects.vue"
-import Home from "../../src/views/Home.vue"
 import Notes from "../../src/views/Notes.vue"
 import Flashcards from "../../src/views/Flashcards.vue"
 import FlashcardFull from "../components/flashcards/FlashcardFull.vue"
@@ -10,7 +9,7 @@ import FlashcardFull from "../components/flashcards/FlashcardFull.vue"
 const routes = [
     {
       path:'/',
-      component:Home
+      component:Notes
     },
     {
       path:'/subjects',

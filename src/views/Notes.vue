@@ -222,6 +222,7 @@ h1{
     transition:0.4s;
     background:rgba(255, 255, 255, 0.959);
     z-index:5;
+    box-shadow:0px 5px 5px rgba(0, 0, 0, 0.445);
 
     &__item{
         
@@ -274,6 +275,7 @@ h1{
 
 .notes-container{
     margin:0;
+    animation:fadein-note 0.5s backwards ease;
 }
 
 .noteitem-slide-in{
@@ -365,6 +367,17 @@ h1{
         padding:0;
     }
     
+}
+
+@keyframes fadein-note{
+    0%{
+        opacity:0.25;
+        transform: translateY(30px);
+    }
+     100%{
+        opacity:1;
+        transform: translateY(0px);
+    }
 }
 
 

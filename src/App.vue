@@ -19,6 +19,7 @@
     </div>
     <div v-else>
       <Login/>
+      
     </div>
 
   </div>
@@ -29,6 +30,7 @@ import MainSidebar from './components/layout/MainSidebar.vue'
 import Modal from './components/layout/Modal.vue'
 import FlashModal from './components/layout/FlashModal.vue'
 import Login from './views/Login.vue'
+
 export default {
   components: { Login, MainSidebar, Modal, FlashModal },
   data(){

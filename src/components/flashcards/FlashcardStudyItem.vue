@@ -1,8 +1,9 @@
 <template>
 
     <div @click="flipCard"  class="flashcard-item flashcardfadein">
-        <div :style="{transform:`rotateX(${flipDegs}deg)`,zIndex:'2'}" class="front">
-            <div @click.stop="dec" class="left-arrow"><i class="fas fa-arrow-alt-circle-left"></i></div>
+         <div @click.stop="dec" class="left-arrow"><i class="fas fa-arrow-alt-circle-left"></i></div>
+        <div  :style="{transform:`rotateX(${flipDegs}deg)`,zIndex:questionVisible ? 1 : 0}" class="front">
+            <div style="margin:0.75rem;"></div>
              <div :class="{
 
                     h3fadeinright:faddingInRight,
@@ -21,12 +22,13 @@
 
             </div>
          
-            <div @click.stop="inc" class="right-arrow"><i class="fas fa-arrow-alt-circle-right"></i></div>
+            <div style="margin:0.75rem;"></div>
         </div>
 
-        <div style="width:100%; height:100%; transform:translateY(-100%); z-index:1;">
-            <div :style="{transform:`rotateX(${flipDegs - 180}deg)`}" class="front">
-                <div @click.stop="dec" class="left-arrow"><i class="fas fa-arrow-alt-circle-left"></i></div>
+        <div style="width:100%; height:100%; transform:translateY(-100%);">
+            <div :style="{transform:`rotateX(${flipDegs - 180}deg)`,zIndex:questionVisible ? 0 : 1}" class="front">
+                 <div style="margin:0.75rem;"></div>
+               
                 <div :class="{
 
                     h3fadeinright:faddingInRight,
@@ -44,11 +46,12 @@
 
 
                 </div>
-                <div @click.stop="inc" class="right-arrow"><i class="fas fa-arrow-alt-circle-right"></i></div>
+                 <div style="margin:0.75rem;"></div>
+               
             </div>
         </div>
 
-        
+         <div @click.stop="inc" class="right-arrow"><i class="fas fa-arrow-alt-circle-right"></i></div>
     </div>
 
          <h4 v-if="array.length" class="progress-counter-text flashcardfadein">{{ind + 1}} of {{array.length}}</h4>
@@ -63,6 +66,7 @@ export default {
         return{
             flipDegs:0,
             ind:0,
+            questionVisible:true,
             faddingOutRight:false,
             faddingInRight:false,
             faddingOutLeft:false,
@@ -72,6 +76,7 @@ export default {
     methods:{
         flipCard(){
             this.flipDegs+=180
+            this.questionVisible = !this.questionVisible
         },
         dec(){
             if(this.faddingOutLeft) return;
@@ -117,10 +122,23 @@ export default {
 
 
     .right-arrow{
-        margin:0.5rem;
+        position: absolute;
+        z-index:3;
+        top:50%;
+        right:1rem;
+        transform: translateY(-50%);
+        border-radius:50%;
+      
+        
     }
     .left-arrow{
-        margin:0.5rem;
+        position: absolute;
+        z-index:3;
+        top:50%;
+        left:1rem;
+        transform: translateY(-50%);
+        border-radius:50%;
+      
     }
 
     .front{
@@ -129,10 +147,12 @@ export default {
         display:flex;
         align-items:center;
         justify-content: center;
-        backface-visibility: hidden;
         transition:0.3s;
         background:rgb(255, 255, 255);
-        overflow:hidden;
+        overflow-x:hidden;
+        backface-visibility: hidden;
+    
+
     }
 
 

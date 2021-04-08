@@ -4,8 +4,8 @@
       <h1>My Flashcards</h1>
       <form @submit.prevent="formHandler" class="login-form" action="">
 
-        <TextInput @text-input="setUsername" input="username"/>
-        <TextInput @text-input="setPassword" input="password"/>
+        <TextInput :required="true" @text-input="setUsername" input="username"/>
+        <TextInput :type="'password'" :required="true" @text-input="setPassword" input="password"/>
       
         <div class="button-login-row">
           <main-button :class="{
@@ -21,6 +21,7 @@
         </div>
       </form>
       <div class="error" v-show="this.error.length">{{error}}</div>
+      <spinner v-if="authenticating">Authenticating...</spinner>
 
       
   </div>
@@ -30,16 +31,18 @@
 import MainButton from "../components/ui/MainButton.vue"
 import SideButton from "../components/ui/SideButton.vue"
 import TextInput from "../components/ui/TextInput.vue"
+import Spinner from '../components/ui/Spinner.vue'
 
 export default 
   {
-  components: { SideButton, MainButton, TextInput },
+  components: { SideButton, MainButton, TextInput, Spinner },
   data(){
     return{
       loggingIn:false,
       username:"",
       password:"",
       error:"",
+      authenticating:false
     }
   },
   methods:{
@@ -51,15 +54,19 @@ export default
       }
     },
     async register(){
+      
+      this.error=""
 
-      if(this.username.length < 5){
+      if(this.username.trim().length < 5){
         this.error = "Username must be at least 5 characters long."
         return
       }
-      if(this.password.length < 5){
+      if(this.password.trim().length < 5){
         this.error = "Password must be at least 5 characters long."
         return
       }
+
+      this.authenticating = true;
 
       const response = await fetch('/.netlify/functions/register',{
         method:"POST",
@@ -67,10 +74,12 @@ export default
           'Content-Type':'application/json'
         },
         body:JSON.stringify({
-          username:this.username,
-          password:this.password
+          username:this.username.trim(),
+          password:this.password.trim()
         })
       });
+
+      this.authenticating = false;
 
       if(response.ok){
         const data = await response.json();
@@ -85,16 +94,23 @@ export default
       }
     },
     async login(){
+
+      this.error=""
+
+      this.authenticating = true;
+
       const response = await fetch('/.netlify/functions/login',{
         method:"POST",
         headers:{
           'Content-Type':'application/json'
         },
         body:JSON.stringify({
-          username:this.username,
-          password:this.password
+          username:this.username.trim(),
+          password:this.password.trim()
         })
       });
+
+      this.authenticating = false;
 
       if(response.ok){
         const data = await response.json();
@@ -111,9 +127,11 @@ export default
     },
     setUsername(txt){
       this.username = txt
+      this.error=""
     },
     setPassword(txt){
       this.password = txt
+      this.error=""
     }
   }
   

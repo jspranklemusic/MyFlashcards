@@ -60,6 +60,7 @@ export default {
         left:0;
         transition:0.25s;
 
+
         & h3{
             font-size:1.1rem;
             margin-bottom:1rem;

@@ -171,7 +171,7 @@ h4,em{
   border-radius:5px;
   overflow:hidden;
   margin:0 auto;
-  animation:fadein-note 0.5s backwards ease;
+  
 }
 
 
@@ -249,7 +249,7 @@ p{
         
 
         &::after{
-            content:"Your text here.";
+            content:"Your content here.";
             color:grey;
             opacity:1;
             transition:0.4s;
@@ -260,7 +260,7 @@ p{
 
         &:focus{
             &::after{
-                content:"Your text here.";
+                content:"Your content here.";
                 opacity:0;
                 transition:0.4s;
             }
@@ -268,10 +268,12 @@ p{
     }
 }
 h2{
+
+    font-size:1rem;
      &:empty{
 
         &::after{
-            content:"Your text here.";
+            content:"Your title here.";
             color:grey;
             opacity:1;
             transition:0.4s;
@@ -279,7 +281,7 @@ h2{
         }
         &:focus{
             &::after{
-                content:"Your text here.";
+                content:"Your title here.";
                 opacity:0;
                 transition:0.4s;
             }
@@ -311,14 +313,5 @@ h2{
     }
 }
 
-@keyframes fadein-note{
-    0%{
-        opacity:0.25;
-        transform: translateY(30px);
-    }
-     100%{
-        opacity:1;
-        transform: translateY(0px);
-    }
-}
+
 </style>

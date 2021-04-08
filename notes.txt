@@ -19,18 +19,15 @@ So... this web app should have the ability for you to:
 BUGS:
 
 1. When removing a note, the blank text of the new note is visible. 
-2. Logging in doesn't do anything yet.
-3. The homepage should take you somewhere. 
+2. Logging in doesn't do anything yet. ---DONE
+3. The homepage should take you somewhere. ---DONE
 4. When you create a note, it should also give you the time. --DONE
-5. On mobile, the screen moves weirdly.
-6. "Saving" the note doesn't do anything.
+5. On mobile, the screen moves weirdly. ---DONE
+6. "Saving" the note doesn't do anything. ---DONE
 7. If there is no note, typing should create a new note. --DONE
 8. There should be placeholder for the text --DONE
-9. The behavior for adding flashcards is strange, doesn't work right if there are zero?
-10. The router should handle going to an id or page that doesn't exist.
-
-git command:
-
+9. The behavior for adding flashcards is strange, doesn't work right if there are zero? ---DONE
+10. The router should handle going to an id or page that doesn't exist. 
 
 
 Info on serverless functions on Netlify:
@@ -41,3 +38,12 @@ Now build the backend.
 1. Login
 2. Register
 3. Modify notes and flashcards
+
+Okay, backend is built with serverless lambda functions. Now to fix some CSS stuff.
+
+1. The notepade has a fadein with EVERY transition, only needs to have one upon opening for the first time, or
+loading the page from a different link. ---DONE
+2. Add a shadow to the sidebar ---DONE
+3. Fix what the homepage does.  ---DONE
+4. Super weird bug with switching flashcards ---DONE (took forever)
+5. Add a loading spinner. Done!
