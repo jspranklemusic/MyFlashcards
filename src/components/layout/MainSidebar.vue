@@ -6,6 +6,7 @@
             </router-link>
             
             <h3>My Flashcards</h3>
+            <p>{{$store.state.username}}</p>
             <!-- <nav>
                 <router-link to="/subjects"><i class="fas fa-square-root-alt"></i> Subjects</router-link>
             </nav>
@@ -27,6 +28,7 @@
             <div :class="{'transform-right':!visible,'toggle-icon':true}" >
                 <i @click="visible=!visible" class="fas fa-ellipsis-h" ></i>
             </div>
+            
         </div>
         
     </div>
@@ -89,6 +91,14 @@ export default {
                 padding:0.35rem;
                 border-radius:50%;
             }
+        }
+
+        p{
+            font-size:0.9rem;
+            margin-top:-.5rem;
+            margin-bottom:1rem;
+            color:rgb(59, 59, 59);
+            opacity:0.5;
         }
         
 
