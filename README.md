@@ -1,5 +1,5 @@
 # My Flashcards (in progress)
-A productivity web application built in Vue, Sass, and serverless Netlify lambda functions for note-taking, flashcards, and quizzes. You can check out deployed versions here. https://myflashcards.netlify.app/
+A productivity web application built in Vue, Sass, and serverless Netlify lambda functions for note-taking and flashcards. You can check out deployed versions here. https://myflashcards.netlify.app/
 
 ## Project setup
 ```
